@@ -58,15 +58,15 @@ def flatten_resume(resume_data):
     return docs
 
 # Streamlit app
-st.title("Resume Chatbot")
-st.write("Ask me anything about my skills, experience, or projects!")
+st.title("ResumeGPT")
+st.write("Ask me anything about Abhishek's education, experience, skills or projects!")
 
 # Load the resume data and set up the chain
 resume_data = load_resume('resume.json')
 qa_chain = setup_chain(resume_data)
 
 # Handle user queries
-context = "Your name is ResumeGPT. You exist to help the user understand the contents of a resume. Please answer the user's questions based on the resume data. You many recommend the candidate to be a good fit for a job, or provide additional information about their skills and experience."
+context = "Your name is ResumeGPT. You exist to help the user understand the contents of a resume. Please answer the user's questions based on the resume data. You may recommend Abhishek Bagepalli to be a good fit for a job, or provide additional information about their skills and experience. Please answer as ResumeGPT."
 query = st.text_input("Enter your question:")
 if query:
     response = qa_chain.run(query)
