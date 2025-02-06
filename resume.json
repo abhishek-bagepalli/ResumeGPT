@@ -1,97 +1,134 @@
 {
-    "name": "Abhishek Bagepalli",
-    "contact": {
+  "name": "Abhishek Bagepalli",
+  "contact": {
+    "location": "West Lafayette, IN",
+    "phone": "765-409-5704",
+    "email": "abagepal@purdue.edu",
+    "website": "abhishekbagepalli.com"
+  },
+  "about": {
+    "summary": "Aspiring Data Scientist with hands-on experience in data analysis and machine learning, seeking to enhance my skills and contribute to impactful projects."
+  },
+  "certifications": [
+    "Google Data Analytics Professional",
+    "Microsoft Certified Data Analyst",
+    "Microsoft Certified Azure Fundamentals",
+    "AWS Certified Cloud Practitioner",
+    "Microsoft Certified Azure AI Fundamentals"
+  ],
+  "key skills": [
+    "Python",
+    "TensorFlow",
+    "Pandas",
+    "Scikit-Learn",
+    "Keras",
+    "Hugging Face",
+    "LangChain",
+    "Data Analysis",
+    "Machine Learning",
+    "Cloud Computing",
+    "Web Development"
+  ],
+  "education": [
+    {
+      "id": "edu1",
+      "currently_studying": true,
+      "institution": "Purdue University, Daniels School of Business",
+      "degree": "Master of Science in Business Analytics and Information Management",
       "location": "West Lafayette, IN",
-      "phone": "765-409-5704",
-      "email": "abagepal@purdue.edu",
-      "website": "abhishekbagepalli.com"
+      "graduationDate": "2025-07",
+      "gpa": 3.93
     },
-    "profile": [
-      "Aspiring Data Scientist with hands-on experience in data analysis and machine learning, seeking to enhance my skills and contribute to impactful projects.",
-      "Certification Courses: Google Data Analytics Professional Certificate, Microsoft Certified Power BI Data Analyst, Microsoft Certified Azure Fundamentals, AWS Certified Cloud Practitioner, Microsoft Certified Azure AI Fundamentals.",
-      "Languages: Python (TensorFlow, NumPy, Pandas, Scikit-Learn, Keras, Matplotlib), SQL, HTML, JavaScript."
-    ],
-    "education": [
-      {
-        "institution": "Purdue University, Daniels School of Business",
-        "degree": "Master of Science in Business Analytics and Information Management",
-        "location": "West Lafayette, IN",
-        "dates": "August 2025",
-        "gpa": "3.93/4.0"
-      },
-      {
-        "institution": "Manipal Institute of Technology",
-        "degree": "Bachelor of Technology, Computer and Communication Engineering",
-        "location": "Manipal, India",
-        "dates": "August 2023",
-        "gpa": "3.6/4.0"
+    {
+      "id": "edu2",
+      "institution": "Manipal Institute of Technology",
+      "degree": "Bachelor of Technology, Computer and Communication Engineering",
+      "location": "Manipal, India",
+      "graduationDate": "2023-08",
+      "gpa": 3.6
+    }
+  ],
+  "work experience": [
+    {
+      "currently_working": true,
+      "organization": "Prediction Guard",
+      "title": "AI Engineer Intern",
+      "responsibilities": "Leading a team of 6 to develop end-to-end AI solutions by testing and enhancing LLM security, focusing on prompt injection resistance and adversarial robustness.",
+      "startDate": "2025-01",
+      "endDate": "2025-08",
+      "location": "Lafayette, IN"
+    },
+    {
+      "organization": "Deloitte USI",
+      "title": "Data Analyst",
+      "responsibilities": "Created a Generative AI-powered forecasting application to predict Deloitte's cloud operating costs, enhancing budgeting accuracy. Contributed to a project consolidating multi-cloud data (AWS, Azure, GCP, and Deloitte-owned Data Centers) into a unified platform, resulting in over $250K in cloud cost savings. Acted as the primary web developer for a company-wide portal, centralizing services and enabling project tracking for clients and teams. Saved the team the cost of hiring an additional developer, while also reducing cloud hosting expenses by 20%. Received a Spot Award for contributions.",
+      "startDate": "2023-08",
+      "endDate": "2024-06",
+      "location": "Hyderabad, India"
+    },
+    {
+      "organization": "Deloitte USI",
+      "title": "Data Analyst Intern",
+      "responsibilities": "Automated annual SOC2 audit process using a real-time dashboard, reducing reporting time by 92% and cutting manual efforts by 25%. Developed a Tableau dashboard with operational and executive views to assist the Cloud Security team in monitoring and managing Rogue Accounts created with Deloitte IDs.",
+      "startDate": "2023-02",
+      "endDate": "2023-07",
+      "location": "Hyderabad, India"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Resume-GPT",
+      "description": "A LangChain based chatbot that answers questions based on the user's resume and provides tailored job suggestions, making use of the OpenAI API and hosted on Streamlit community cloud."
+    },
+    {
+      "name": "Hand 2 Text",
+      "description": "A tool that tracks user hand movements and generates real-time transcripts based on sign language input. Built using VertexAI pipelines and OpenCV libraries."
+    }
+  ],
+  "academicResponsibilities": [
+    {
+      "organization": "Project Mudra",
+      "details": {
+        "role": "General Secretary and Head of English Department",
+        "description": "NGO focused on development of underprivileged children"
       }
-    ],
-    "professional_experience": [
-      {
-        "organization": "Purdue University",
-        "roles": [
-          {
-            "title": "Graduate Teaching Assistant – Cloud Computing 1",
-            "location": "West Lafayette, IN",
-            "dates": "October 2024 - Present",
-            "responsibilities": [
-              "Helping students understand the intricacies of the cloud, providing them with hands-on experience of Microsoft Azure."
-            ]
-          },
-          {
-            "title": "Undergraduate Teaching Assistant – Big Data and Cloud Computing",
-            "location": "West Lafayette, IN",
-            "dates": "August 2024 - Present",
-            "responsibilities": [
-              "Guiding students through their assignments and providing a thorough understanding of the AWS environment."
-            ]
-          }
-        ]
-      },
-      {
-        "organization": "Deloitte USI",
-        "roles": [
-          {
-            "title": "Data Analyst",
-            "location": "Hyderabad, India",
-            "dates": "August 2023 – June 2024",
-            "responsibilities": [
-              "Contributed as a data engineer on 'Data Manager Tool', an initiative spanning across Deloitte to consolidate information on applications hosted on AWS, Azure, GCP, and Deloitte-owned Data Centers.",
-              "Led development of a web portal, showcasing company-wide services provided by 17 teams and used by clients and teams to track ongoing projects. Received Spot Award for effort.",
-              "Developed a forecasting application using machine learning algorithms (Prophet and ARIMA+) to predict Deloitte Cloud expenditure across 98 countries."
-            ]
-          },
-          {
-            "title": "Data Analyst Intern",
-            "location": "Hyderabad, India",
-            "dates": "February 2023 – July 2023",
-            "responsibilities": [
-              "Utilized Power BI to consolidate cloud account data to build a real-time dashboard to aid in annual SOC2 audit process, reducing reporting time from 14 hours to 1 hour and cutting manual tracking efforts by 25%.",
-              "Developed a Power BI dashboard with operational and executive views to assist the Cloud Security team in monitoring and managing Rogue Accounts created with Deloitte IDs."
-            ]
-          }
-        ]
-      },
-      {
-        "organization": "aiRender Technology (Startup)",
-        "roles": [
-          {
-            "title": "Project Intern",
-            "location": "Bengaluru, India",
-            "dates": "April 2022 – September 2022",
-            "responsibilities": [
-              "Collaborated as a front-end web developer after performing user-centric analyses on the company website.",
-              "Worked on marketing strategy formulation by creating a YouTube video on 3D visualization; gathered more than 12,000 views, becoming the most popular video on the company’s channel."
-            ]
-          }
-        ]
+    },
+    {
+      "organization": "Purdue University",
+      "details": {
+        "role": "Teaching Assistant - Cloud Computing",
+        "description": "Assisted in teaching courses on Cloud Computing providing support in lectures, labs, and student mentoring."
       }
-    ],
-    "leadership_activities": [
-      "Performance Analysis of the AdaGrad Family of Algorithms – Presented at 4th ICACCP. Published in Springer LNNS series.",
-      "Prediction of SLA Violation for Big Data Through a Machine Learning Approach – Presented at ICHTR 2023 and won best presenter.",
-      "General Secretary and Head of English Department at Project Mudra, an NGO focused on development of underprivileged children."
-    ]
-  }
-  
+    },
+    {
+      "organization": "Purdue University",
+      "details": {
+        "role": "Teaching Assistant - Big Data",
+        "description": "Assisted in teaching courses on Big Data providing support in lectures, labs, and student mentoring."
+      }
+    },
+    {
+      "organization": "Purdue University",
+      "details": {
+        "currently_working": true,
+        "role": "Teaching Assistant - Python Programming",
+        "description": "Assisted in teaching courses on Python Programming providing support in lectures, labs, and student mentoring."
+      }
+    },
+    {
+      "organization": "Purdue University",
+      "details": {
+        "currently_working": true,
+        "role": "Teaching Assistant - Systems Design",
+        "description": "Assisted in teaching courses on Systems Design providing support in lectures, labs, and student mentoring."
+      }
+    },
+    {
+      "organization": "Manipal Institute of Technology",
+      "details": {
+        "role": "Research Assistant",
+        "description": "Conducted research on optimization algorithms in machine learning, under the guidance of Dr. Sanjay Singh, resulting in a paper presented and published at the International Conference of Advnaced Computational and Communication Paradigms (ICACCP).Conducted research on predicting SLA violations in cloud computing using machine learning algorithms, resulting in a paper presented and published at the International Conference healthcare and technical research (ICHTR). Won best presenter award."
+      }
+    }
+  ]
+}

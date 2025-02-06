@@ -6,7 +6,6 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI
 import os
-
 # Load your resume data
 def load_resume(file_path):
     with open(file_path, "r") as f:
@@ -15,15 +14,17 @@ def load_resume(file_path):
 # Initialize the LangChain setup
 def setup_chain(resume_data):
     # Flatten the JSON into text for embedding
-    docs = flatten_resume(resume_data)
+    docs = flatten_resume(resume_data)    
 
     # Create embeddings and a vector store
     embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
     vector_store = FAISS.from_texts(docs, embeddings)
 
+
+
     # Define a LangChain QA chain
     retriever = vector_store.as_retriever()
-    llm = OpenAI(temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"))
+    llm = OpenAI(temperature=0.2, openai_api_key=os.getenv("OPENAI_API_KEY"))
     qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
     return qa_chain
@@ -66,8 +67,10 @@ resume_data = load_resume('resume.json')
 qa_chain = setup_chain(resume_data)
 
 # Handle user queries
-context = "Your name is ResumeGPT. You exist to help the user understand the contents of a resume. Please answer the user's questions based on the resume data. You may recommend Abhishek Bagepalli to be a good fit for a job, or provide additional information about their skills and experience. Please answer as ResumeGPT."
+
 query = st.text_input("Enter your question:")
 if query:
-    response = qa_chain.run(query)
+    context = "Your name is ResumeGPT. Your purpose is to answer questions about Abhishek Bagepalli's resume. You have access to his education, experience, skills and projects. Make your answers show off Abhishek's qualities. Add roles for which Abhishek's qualities would be a good fit. Answer extensively and in detail."
+    full_query = f"{context}\n{query}"
+    response = qa_chain.run(full_query)
     st.write(response)
