@@ -2,7 +2,7 @@ import json
 import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI
 import os
