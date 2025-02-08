@@ -1,4 +1,9 @@
-tte-owned Data Centers) into a unified platform, resulting in over $250K in cloud cost savings. Acted as the primary web developer for a company-wide portal, centralizing services and enabling project tracking for clients and teams. Saved the team the cost of hiring an additional developer, while also reducing cloud hosting expenses by 20%. Received a Spot Award for contributions.",
-    "work experience 3 company: Deloitte USI",
-    "work experience 3 title: Data Analyst Intern",
-    "work experience 3 location: Hyderabad, India",
+prompt = ChatPromptTemplate.from_messages(
+#     [
+#         ("system", "Your name is ResumeGPT. Your purpose is to answer questions about Abhishek Bagepalli's resume. You have access to his education, experience, skills and projects."),
+#         # MessagesPlaceholder(variable_name="history"),  # Enables chat memory
+#         ("human", "{question}"),
+#     ]
+# )
+
+# llm = OpenAI(temperature=0.2, openai_api_key=os.getenv("OPENAI_API_KEY"))

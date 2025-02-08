@@ -16,6 +16,8 @@ def setup_chain(resume_data):
     # Flatten the JSON into text for embedding
     docs = flatten_resume(resume_data)    
 
+    # print(docs)
+
     # Create embeddings and a vector store
     embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
     vector_store = FAISS.from_texts(docs, embeddings)
@@ -26,6 +28,8 @@ def setup_chain(resume_data):
     retriever = vector_store.as_retriever()
     llm = OpenAI(temperature=0.2, openai_api_key=os.getenv("OPENAI_API_KEY"))
     qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+
+    # print(qa_chain)
 
     return qa_chain
 
@@ -70,7 +74,7 @@ qa_chain = setup_chain(resume_data)
 
 query = st.text_input("Enter your question:")
 if query:
-    context = "Your name is ResumeGPT. Your purpose is to answer questions about Abhishek Bagepalli's resume. You have access to his education, experience, skills and projects. Make your answers show off Abhishek's qualities. Add roles for which Abhishek's qualities would be a good fit. Answer extensively and in detail."
+    context = "Your name is ResumeGPT. Your purpose is to talk with he user and answer questions about Abhishek Bagepalli's resume. Answer only if asked something. Try to answer in bullet points. You have access to his education, experience, skills and projects. If asked, make your answers show off Abhishek's qualities. Add roles for which Abhishek's qualities would be a good fit. "
     full_query = f"{context}\n{query}"
     response = qa_chain.run(full_query)
     st.write(response)
