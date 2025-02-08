@@ -53,7 +53,7 @@ chain_with_history = RunnableWithMessageHistory(
 
 # Streamlit app
 st.title("ResumeGPT")
-st.write("")
+st.write("Ask me anything about Abhishek's skills, experience, or projects!")
 if len(msgs.messages) == 0:
     msgs.add_ai_message("Hello!")
 
