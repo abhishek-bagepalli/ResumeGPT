@@ -3,3 +3,7 @@ localllama.py
 .env
 temp.ipynb
 resume_reader_v2.py
+config.toml
+temp1-321221-dabd56a34836.json
+.streamlit/secrets.toml
+credentials.json
