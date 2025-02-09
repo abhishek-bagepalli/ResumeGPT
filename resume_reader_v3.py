@@ -26,7 +26,7 @@ def main():
     # gc = gspread.service_account("temp1-321221-dabd56a34836.json")
 
     # Use st.secrets to get the service account info
-    credentials = Credentials.from_service_account_info(st.secrets["gcp_service_account"])
+    credentials = Credentials.from_service_account_info(st.secrets["connections"]["gsheets"])
     gc = gspread.authorize(credentials)
 
     # conn = st.connection("gsheets",type=GSheetsConnection)
