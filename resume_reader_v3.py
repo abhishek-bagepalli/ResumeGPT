@@ -23,20 +23,13 @@ def doc_loader(file_path):
 
 def main():
 
-    # gc = gspread.service_account("temp1-321221-dabd56a34836.json")
-
-    # Use st.secrets to get the service account info
-    credentials = Credentials.from_service_account_info(st.secrets["gcp_service_account"])
-    gc = gspread.authorize(credentials)
-
-    # conn = st.connection("gsheets",type=GSheetsConnection)
+    google_creds = st.secrets["google_creds"]
+    creds = Credentials.from_service_account_info(google_creds, scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"])
+    gc = gspread.authorize(creds)
 
     pages = doc_loader('resume.pdf')
 
     msgs = StreamlitChatMessageHistory()
-
-    # print(f"{pages[0].metadata}\n")
-    # print(pages[0].page_content)
 
     vector_store = InMemoryVectorStore.from_documents(pages, OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY")))
 
@@ -80,33 +73,13 @@ def main():
         # As usual, new messages are added to StreamlitChatMessageHistory when the Chain is called.
         config = {"configurable": {"session_id": "any"}}
         response2 = chain_with_history.invoke({"question":user_input,"resume":docs[0].page_content}, config)
-        # print(user_input)
-        # print(response2)
 
         st.chat_message("ai").write(response2.content)
 
         wks = gc.open("ResumeGPT").sheet1
 
-        # wks.update([[user_input,response2.content]])
-
         wks.append_rows([[user_input,response2.content]])
-        # existing_data = conn.read()
 
-        # df = pd.DataFrame(data=[{"user_input":user_input,"response":response2.content}])
-
-        # print(existing_data)
-
-        # updated_data = pd.concat([existing_data,df],ignore_index=True)
-
-        # print(updated_data)      
-
-        # conn.update(data=updated_data)
-
-        # print(existing_data.columns)
-        
-        # existing_data['user_input'].append(user_input)
-        # existing_data['response'].append(response2.content)
-        #display AI response
         return json.dumps({"response":response2.content,"user_input":user_input})
     
 if __name__ == "__main__":
