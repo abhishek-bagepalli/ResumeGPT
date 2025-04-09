@@ -12,7 +12,7 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
-import speech_recognition as sr
+# import speech_recognition as sr
 
 def doc_loader(file_path):
     loader = PyPDFLoader(file_path)
