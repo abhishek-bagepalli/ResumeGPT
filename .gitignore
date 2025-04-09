@@ -1,11 +1,13 @@
 app.py
 localllama.py
 .env
-
+linkedin_jobs.json
 resume_reader_v2.py
 config.toml
-
+temp.ipynb
 .streamlit/secrets.toml
-
+scrape_linkedin.py
 temp.py
 temp1-321221-945d78144c78.json
+tempCodeRunnerFile.py
+Workbook - Waypoints for Competitive Employment v250223_0154.pdf

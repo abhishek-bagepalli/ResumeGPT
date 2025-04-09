@@ -7,12 +7,12 @@ from langchain_openai  import ChatOpenAI
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 import streamlit as st
-import sys
 import json
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
+import speech_recognition as sr
 
 def doc_loader(file_path):
     loader = PyPDFLoader(file_path)
@@ -33,9 +33,8 @@ def main():
 
     vector_store = InMemoryVectorStore.from_documents(pages, OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY")))
 
-    docs = vector_store.similarity_search("Deloitte", k=2)
-    # for doc in docs:
-    #     print(doc)
+    
+
 
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -71,6 +70,8 @@ def main():
         st.chat_message("human").write(user_input)
 
         # As usual, new messages are added to StreamlitChatMessageHistory when the Chain is called.
+
+        docs = vector_store.similarity_search(user_input, k=2)
         config = {"configurable": {"session_id": "any"}}
         response2 = chain_with_history.invoke({"question":user_input,"resume":docs[0].page_content}, config)
 
@@ -81,6 +82,22 @@ def main():
         wks.append_rows([[user_input,response2.content]])
 
         return json.dumps({"response":response2.content,"user_input":user_input})
+    
+    # elif user_input == st.audio_input("user_input"):
+    #     # Initialize speech recognition
+    #     recognizer = sr.Recognizer()
+    #     with sr.Microphone() as source:
+    #         st.write("Listening... Speak now")
+    #         try:
+    #             audio = recognizer.listen(source, timeout=5)
+    #             user_input = recognizer.recognize_google(audio)
+    #             st.write(f"You said: {user_input}")
+    #         except sr.WaitTimeoutError:
+    #             st.error("No speech detected within timeout period")
+    #         except sr.UnknownValueError:
+    #             st.error("Could not understand audio")
+    #         except sr.RequestError as e:
+    #             st.error(f"Could not request results; {e}")
     
 if __name__ == "__main__":
     main()
