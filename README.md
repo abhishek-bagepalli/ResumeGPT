@@ -1,6 +1,44 @@
 # ResumeGPT
 
-ResumeGPT is an intelligent resume analysis and job matching platform that leverages AI to help users optimize their resumes and find relevant job opportunities. The application uses advanced natural language processing and machine learning techniques to provide personalized insights and recommendations.
+## Project Description
+
+ResumeGPT is an innovative AI-powered platform designed to revolutionize the way job seekers approach their career development. By combining cutting-edge artificial intelligence with practical career guidance, ResumeGPT offers a comprehensive solution for resume optimization and job matching.
+
+### Core Functionality
+
+The platform leverages advanced natural language processing and machine learning techniques to:
+
+- **Analyze and Optimize Resumes**: Using GPT models to provide detailed feedback on resume content, structure, and formatting, helping users create more impactful resumes that stand out to employers.
+
+- **Smart Job Matching**: Through vector similarity search and semantic analysis, the platform matches resumes with relevant job opportunities, considering both explicit qualifications and implicit skills.
+
+- **LinkedIn Integration**: Automatically scrapes and analyzes job postings from LinkedIn, providing real-time insights into market demands and helping users tailor their applications accordingly.
+
+- **Interactive AI Assistant**: Offers personalized career guidance through an intuitive chat interface, answering questions about resume writing, job search strategies, and career development.
+
+### Technical Innovation
+
+ResumeGPT stands out through its sophisticated technical implementation:
+
+- **Vector Database Architecture**: Utilizes ChromaDB for efficient storage and retrieval of semantic embeddings, enabling fast and accurate job matching.
+
+- **Advanced NLP Pipeline**: Implements a multi-stage processing pipeline that extracts, analyzes, and enhances resume content using state-of-the-art language models.
+
+- **Real-time Processing**: Provides instant feedback and recommendations through Streamlit's interactive interface, making the platform both powerful and user-friendly.
+
+### Target Users
+
+- Job seekers looking to optimize their resumes
+- Career changers seeking guidance on skill presentation
+- HR professionals and recruiters for candidate evaluation
+- Career counselors and advisors for client support
+
+### Impact and Benefits
+
+- **Time Efficiency**: Reduces the time spent on resume optimization and job searching
+- **Quality Improvement**: Enhances resume quality through AI-powered suggestions
+- **Market Alignment**: Helps align candidate profiles with current market demands
+- **Career Growth**: Provides actionable insights for professional development
 
 ## Features
 
