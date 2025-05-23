@@ -1,6 +1,9 @@
 from langchain_community.document_loaders import PyPDFLoader
 import os
-from langchain_core.vectorstores import InMemoryVectorStore
+from langchain_community.vectorstores import Chroma
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.docstore.document import Document
+
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai  import ChatOpenAI
@@ -29,75 +32,80 @@ def main():
 
     pages = doc_loader('resume.pdf')
 
-    msgs = StreamlitChatMessageHistory()
+    print(len(pages))
 
-    vector_store = InMemoryVectorStore.from_documents(pages, OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY")))
+    # msgs = StreamlitChatMessageHistory()
 
-    
+    # Chunk the documents (optional but recommended for RAG)
+    text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    chunks = text_splitter.split_documents(pages)
+
+    print(chunks)
+
+    # # Create the Chroma vector store (stored in ./chroma_db by default)
+    # vector_store = Chroma.from_documents(
+    #     documents=chunks,
+    #     embedding=OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY")),
+    #     persist_directory="./chroma_db"
+    # )
+
+    # user_input = 'How do you think Abhishek is doing?'
+
+    # docs = vector_store.similarity_search(user_input, k=2)
+    # retrieved_content = "\n".join([doc.page_content for doc in docs])
+
+    # print(retrieved_content)
 
 
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            ("system", "Your name is ResumeGPT. Your purpose is to respond to the question. If applicable, answer questions about Abhishek Bagepalli's resume. Here is his resume. {resume}"),
-            # ("system", "Your are a helpful chatbot"),
-            MessagesPlaceholder(variable_name="history"),  # Enables chat memory
-            ("human", "{question}"),
-        ]
-    )
+    # vector_store = InMemoryVectorStore.from_documents(pages, OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY")))
 
-    llm = ChatOpenAI(temperature=0.2, openai_api_key=os.getenv("OPENAI_API_KEY"))
+    # prompt = ChatPromptTemplate.from_messages(
+    #     [
+    #         ("system", "Your name is ResumeGPT. Your purpose is to respond to the question. If applicable, answer questions about Abhishek Bagepalli's resume. Here is his resume. {resume}"),
+    #         # ("system", "Your are a helpful chatbot"),
+    #         MessagesPlaceholder(variable_name="history"),  # Enables chat memory
+    #         ("human", "{question}"),
+    #     ]
+    # )
 
-    qa_chain = prompt | llm
+    # llm = ChatOpenAI(temperature=0.2, openai_api_key=os.getenv("OPENAI_API_KEY"))
 
-    chain_with_history = RunnableWithMessageHistory(
-        qa_chain,
-        lambda session_id: msgs,  # Always return the instance created earlier
-        input_messages_key="question",
-        history_messages_key="history",
-    )
+    # qa_chain = prompt | llm
 
-    # Streamlit app
-    st.title("ResumeGPT")
-    st.write("Ask me anything about Abhishek's skills, experience, or projects!")
-    if len(msgs.messages) == 0:
-        msgs.add_ai_message("Hello!")
+    # chain_with_history = RunnableWithMessageHistory(
+    #     qa_chain,
+    #     lambda session_id: msgs,  # Always return the instance created earlier
+    #     input_messages_key="question",
+    #     history_messages_key="history",
+    # )
 
-    for msg in msgs.messages:
-        st.chat_message(msg.type).write(msg.content)
+    # # Streamlit app
+    # st.title("ResumeGPT")
+    # st.write("Ask me anything about Abhishek's skills, experience, or projects!")
+    # if len(msgs.messages) == 0:
+    #     msgs.add_ai_message("Hello!")
 
-    # user_input = "Where has Abhishek worked?"
-    if user_input := st.chat_input():
-        st.chat_message("human").write(user_input)
+    # for msg in msgs.messages:
+    #     st.chat_message(msg.type).write(msg.content)
 
-        # As usual, new messages are added to StreamlitChatMessageHistory when the Chain is called.
+    # # user_input = "Where has Abhishek worked?"
+    # if user_input := st.chat_input():
+    #     st.chat_message("human").write(user_input)
 
-        docs = vector_store.similarity_search(user_input, k=2)
-        config = {"configurable": {"session_id": "any"}}
-        response2 = chain_with_history.invoke({"question":user_input,"resume":docs[0].page_content}, config)
+    #     # As usual, new messages are added to StreamlitChatMessageHistory when the Chain is called.
 
-        st.chat_message("ai").write(response2.content)
+    #     docs = vector_store.similarity_search(user_input, k=2)
+    #     config = {"configurable": {"session_id": "any"}}
+    #     response2 = chain_with_history.invoke({"question":user_input,"resume":docs[0].page_content}, config)
 
-        wks = gc.open("ResumeGPT").sheet1
+    #     st.chat_message("ai").write(response2.content)
 
-        wks.append_rows([[user_input,response2.content]])
+    #     wks = gc.open("ResumeGPT").sheet1
 
-        return json.dumps({"response":response2.content,"user_input":user_input})
-    
-    # elif user_input == st.audio_input("user_input"):
-    #     # Initialize speech recognition
-    #     recognizer = sr.Recognizer()
-    #     with sr.Microphone() as source:
-    #         st.write("Listening... Speak now")
-    #         try:
-    #             audio = recognizer.listen(source, timeout=5)
-    #             user_input = recognizer.recognize_google(audio)
-    #             st.write(f"You said: {user_input}")
-    #         except sr.WaitTimeoutError:
-    #             st.error("No speech detected within timeout period")
-    #         except sr.UnknownValueError:
-    #             st.error("Could not understand audio")
-    #         except sr.RequestError as e:
-    #             st.error(f"Could not request results; {e}")
+    #     wks.append_rows([[user_input,response2.content]])
+
+    #     return json.dumps({"response":response2.content,"user_input":user_input})
+
     
 if __name__ == "__main__":
     main()
